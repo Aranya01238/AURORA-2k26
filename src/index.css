@@ -49,6 +49,10 @@
     --sidebar-accent-foreground: 45 30% 90%;
     --sidebar-border: 270 30% 20%;
     --sidebar-ring: 45 80% 55%;
+
+    /* Custom cursor variable */
+    --custom-cursor: url('/Cursor.png') 16 16, auto;
+    --custom-cursor-pointer: url('/Cursor.png') 16 16, pointer;
   }
 
   .dark {
@@ -408,51 +412,51 @@
   background: radial-gradient(circle, var(--tw-gradient-stops));
 }
 
-/* Magical Cursor Styles */
-.magical-cursor-active {
-  cursor: none !important;
-}
-
-.magical-cursor-active * {
-  cursor: none !important;
-}
-
-/* Custom cursor for interactive elements */
-.magical-cursor-active button:hover,
-.magical-cursor-active a:hover,
-.magical-cursor-active [role="button"]:hover {
-  transform: scale(1.1);
-}
-
-/* Hide default cursor on magical elements */
-.magical-element {
-  cursor: none;
-}
-
-/* Particle canvas blend modes */
-.particle-canvas {
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-
-/* Custom Magical Cursor using Cursor.png */
+/* Custom Magical Cursor using Cursor.png with hotspot coordinates */
+html,
 body {
-  cursor: url('/Cursor.png'), auto;
+  cursor: url('/Cursor.png') 16 16, auto !important;
 }
 
-/* Ensure all elements use the custom cursor */
-* {
-  cursor: url('/Cursor.png'), auto;
+/* Custom Magical Cursor using CSS variables */
+html {
+  cursor: var(--custom-cursor) !important;
 }
 
-/* Interactive elements with hover effects */
+html,
+body {
+  cursor: var(--custom-cursor) !important;
+}
+
+/* Hide default cursor everywhere - Custom cursor handled by component */
+html {
+  cursor: none !important;
+}
+
+html,
+body {
+  cursor: none !important;
+}
+
+/* Ensure all elements hide default cursor */
+*,
+*::before,
+*::after {
+  cursor: none !important;
+}
+
+/* Interactive elements also hide cursor */
 button,
 a,
 [role="button"],
 input,
 textarea,
-select {
-  cursor: url('/Cursor.png'), pointer;
+select,
+.btn,
+.button,
+[data-button],
+[onclick] {
+  cursor: none !important;
 }
 
 button:hover,
@@ -462,7 +466,8 @@ a:hover,
   transition: transform 0.2s ease;
 }
 
-/* Remove the old cursor implementation */
-body::after {
-  display: none;
+/* Force cursor on specific Tailwind/React components */
+[class*="cursor-"],
+[style*="cursor"] {
+  cursor: none !important;
 }

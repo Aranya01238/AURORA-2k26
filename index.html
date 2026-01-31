@@ -11,6 +11,27 @@
   <meta name="keywords"
     content="AURORA 2K26, Harry Potter, college event, coding competition, hackathon, quiz, standup comedy" />
 
+  <!-- Preload custom cursor images -->
+  <link rel="preload" href="/Cursor.png" as="image" type="image/png" />
+  <link rel="preload" href="/Cursor2.png" as="image" type="image/png" />
+
+  <!-- Force custom cursor script -->
+  <script>
+    // Ensure custom cursor loads immediately
+    document.addEventListener('DOMContentLoaded', function () {
+      const style = document.createElement('style');
+      style.textContent = `
+        *, *::before, *::after {
+          cursor: url('/Cursor.png') 16 16, auto !important;
+        }
+        button, a, [role="button"], input, textarea, select {
+          cursor: url('/Cursor.png') 16 16, pointer !important;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  </script>
+
   <meta property="og:title" content="AURORA 2K26 | Harry Potter Themed Event" />
   <meta property="og:description"
     content="A magical Harry Potter themed flagship event featuring Documentary, Coding, Comedy, Quiz, and Ideathon competitions. 23rd-27th February 2026." />

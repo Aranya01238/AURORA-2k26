@@ -21,6 +21,8 @@ const EnhancedMagicalCursor = () => {
   const mouseRef = useRef({ x: 0, y: 0, prevX: 0, prevY: 0 });
   const animationRef = useRef<number>();
   const [isActive, setIsActive] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 100, y: 100 });
+  const [isHovering, setIsHovering] = useState(false);
 
   // Harry Potter themed magical colors
   const magicalColors = {
@@ -91,6 +93,9 @@ const EnhancedMagicalCursor = () => {
       mouseRef.current.prevY = mouseRef.current.y;
       mouseRef.current.x = e.clientX;
       mouseRef.current.y = e.clientY;
+
+      // Update mouse position for custom cursor
+      setMousePosition({ x: e.clientX, y: e.clientY });
 
       setIsActive(true);
 
@@ -235,12 +240,41 @@ const EnhancedMagicalCursor = () => {
     document.addEventListener('mouseenter', handleMouseEnter);
     document.addEventListener('mouseleave', handleMouseLeave);
 
+    // Hover detection for interactive elements
+    const handleMouseOver = (e: Event) => {
+      const target = e.target as HTMLElement;
+      const isInteractive = target.matches('button, a, [role="button"], input, textarea, select, .btn, .button, [data-button], [onclick]') ||
+                           target.closest('button, a, [role="button"], input, textarea, select, .btn, .button, [data-button], [onclick]');
+      setIsHovering(!!isInteractive);
+    };
+
+    const handleMouseOut = (e: Event) => {
+      const target = e.target as HTMLElement;
+      const relatedTarget = (e as MouseEvent).relatedTarget as HTMLElement;
+      
+      // Check if we're still over an interactive element
+      const isStillInteractive = relatedTarget && (
+        relatedTarget.matches('button, a, [role="button"], input, textarea, select, .btn, .button, [data-button], [onclick]') ||
+        relatedTarget.closest('button, a, [role="button"], input, textarea, select, .btn, .button, [data-button], [onclick]')
+      );
+      
+      if (!isStillInteractive) {
+        setIsHovering(false);
+      }
+    };
+
+    // Add hover detection listeners
+    document.addEventListener('mouseover', handleMouseOver);
+    document.addEventListener('mouseout', handleMouseOut);
+
     // Cleanup
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseenter', handleMouseEnter);
       document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mouseout', handleMouseOut);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
@@ -256,34 +290,39 @@ const EnhancedMagicalCursor = () => {
           mixBlendMode: 'screen',
         }}
       />
-      {/* Custom cursor */}
+      
+      {/* Custom Cursor Image that follows mouse */}
+      <div
+        className="fixed pointer-events-none z-[9999]"
+        style={{
+          left: mousePosition.x - 48,
+          top: mousePosition.y - 48,
+          opacity: 1, // Always show cursor
+        }}
+      >
+        <img 
+          src={isHovering ? "/Cursor2.png" : "/Cursor.png"}
+          alt="Custom Cursor" 
+          className="w-24 h-24 object-contain"
+          style={{ 
+            filter: isHovering 
+              ? 'drop-shadow(0 0 12px rgba(255, 215, 0, 0.9)) drop-shadow(0 0 20px rgba(255, 100, 0, 0.5))' 
+              : 'drop-shadow(0 0 8px rgba(255, 215, 0, 0.7))',
+            imageRendering: 'pixelated',
+            transform: isHovering ? 'scale(1.1)' : 'scale(1)',
+            transition: 'all 0.2s ease'
+          }}
+        />
+      </div>
+      
+      {/* Hide default cursor */}
       <style jsx global>{`
         * {
           cursor: none !important;
         }
         
-        .magical-cursor {
-          position: fixed;
-          width: 20px;
-          height: 20px;
-          border: 2px solid #FFD700;
-          border-radius: 50%;
-          pointer-events: none;
-          z-index: 9999;
-          mix-blend-mode: difference;
-          transition: transform 0.1s ease;
-        }
-        
-        .magical-cursor::before {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 6px;
-          height: 6px;
-          background: #FFD700;
-          border-radius: 50%;
-          transform: translate(-50%, -50%);
+        body {
+          cursor: none !important;
         }
       `}</style>
     </>
