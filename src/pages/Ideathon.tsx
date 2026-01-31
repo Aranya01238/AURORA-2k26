@@ -164,45 +164,71 @@ const Ideathon = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-orange-900 to-slate-900">
       <Navbar />
       
-      {/* Hero Section with 3D Scene */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Canvas camera={{ position: [0, 0, 15], fov: 75 }}>
-            <Suspense fallback={null}>
-              <Environment preset="night" />
-              <ambientLight intensity={0.4} />
-              <pointLight position={[10, 10, 10]} intensity={1} color="#ff6600" />
-              <spotLight position={[-10, -10, -10]} angle={0.15} penumbra={1} intensity={0.5} color="#ffff00" />
-              
-              <LightBulb3D position={[0, 0, 0]} glowing={true} />
-              {bulbPositions.map((position, i) => (
-                <LightBulb3D key={i} position={position} glowing={i % 2 === 0} />
-              ))}
-              
-              <Gear3D position={[-5, -2, 2]} size={0.8} />
-              <Gear3D position={[5, -1, -2]} size={1.2} />
-              <Rocket3D />
-              
-              <Sparkles count={120} scale={15} size={4} speed={0.5} color="#ffff00" />
-              <OrbitControls enableZoom={false} enablePan={false} />
-            </Suspense>
-          </Canvas>
-        </div>
-        
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-          <Badge className="mb-4 bg-orange-600 hover:bg-orange-700">
-            <Lightbulb className="w-4 h-4 mr-2" />
-            Day 5 - February 27th
-          </Badge>
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-yellow-400 to-orange-600 bg-clip-text text-transparent">
-            Ideathon
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-gray-300">
-            A 4-hour hackathon to brew innovative ideas and create magical solutions
-          </p>
-          <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white">
-            Register Team Now
-          </Button>
+      {/* Hero Section with Split Layout */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center min-h-screen">
+            {/* Left Side - Event Information */}
+            <div className="text-white space-y-6 z-10 relative pr-8">
+              <Badge className="mb-4 bg-orange-600 hover:bg-orange-700 w-fit">
+                <Lightbulb className="w-4 h-4 mr-2" />
+                Day 5 - February 27th
+              </Badge>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-yellow-400 to-orange-600 bg-clip-text text-transparent leading-tight">
+                Ideathon
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-300 max-w-lg">
+                A 4-hour hackathon to brew innovative ideas and create magical solutions
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Calendar className="w-5 h-5 text-orange-500" />
+                  <span>February 27th, 2024</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-300">
+                  <MapPin className="w-5 h-5 text-orange-500" />
+                  <span>Innovation Lab</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Users className="w-5 h-5 text-orange-500" />
+                  <span>3 Members Team</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Clock className="w-5 h-5 text-orange-500" />
+                  <span>4 Hours Duration</span>
+                </div>
+              </div>
+              <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white">
+                Register Team Now
+              </Button>
+            </div>
+
+            {/* Right Side - 3D Scene */}
+            <div className="h-[600px] lg:h-[700px] relative">
+              <Canvas camera={{ position: [0, 0, 15], fov: 75 }}>
+                <Suspense fallback={null}>
+                  <Environment preset="night" />
+                  <ambientLight intensity={0.4} />
+                  <pointLight position={[10, 10, 10]} intensity={1} color="#ff6600" />
+                  <spotLight position={[-10, -10, -10]} angle={0.15} penumbra={1} intensity={0.5} color="#ffff00" />
+                  
+                  <group scale={0.7}>
+                    <LightBulb3D position={[0, 0, 0]} glowing={true} />
+                    {bulbPositions.map((position, i) => (
+                      <LightBulb3D key={i} position={position} glowing={i % 2 === 0} />
+                    ))}
+                    
+                    <Gear3D position={[-5, -2, 2]} size={0.8} />
+                    <Gear3D position={[5, -1, -2]} size={1.2} />
+                    <Rocket3D />
+                  </group>
+                  
+                  <Sparkles count={120} scale={15} size={4} speed={0.5} color="#ffff00" />
+                  <OrbitControls enableZoom={false} enablePan={false} />
+                </Suspense>
+              </Canvas>
+            </div>
+          </div>
         </div>
       </section>
 

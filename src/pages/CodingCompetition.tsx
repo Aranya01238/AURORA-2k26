@@ -107,43 +107,69 @@ const CodingCompetition = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
       <Navbar />
       
-      {/* Hero Section with 3D Scene */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Canvas camera={{ position: [0, 0, 12], fov: 75 }}>
-            <Suspense fallback={null}>
-              <Environment preset="night" />
-              <ambientLight intensity={0.4} />
-              <pointLight position={[10, 10, 10]} intensity={1} color="#00ff41" />
-              <spotLight position={[-10, -10, -10]} angle={0.15} penumbra={1} intensity={0.5} color="#0066cc" />
-              
-              <Laptop3D />
-              <CodeBlock position={[-5, 2, 2]} color="#e74c3c" code="function magic()" />
-              <CodeBlock position={[5, 1, -2]} color="#3498db" code="const wizard = {}" />
-              <CodeBlock position={[3, -2, 3]} color="#2ecc71" code="if (spell.works)" />
-              <CodeBlock position={[-3, -1, -3]} color="#f39c12" code="return victory;" />
-              
-              <BinaryRain />
-              <Sparkles count={100} scale={15} size={3} speed={0.5} color="#00ff41" />
-              <OrbitControls enableZoom={false} enablePan={false} />
-            </Suspense>
-          </Canvas>
-        </div>
-        
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-          <Badge className="mb-4 bg-blue-600 hover:bg-blue-700">
-            <Code className="w-4 h-4 mr-2" />
-            Day 2 - February 24th
-          </Badge>
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
-            Coding Competition
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-gray-300">
-            Cast your programming spells and solve challenging problems. Let your code create magic!
-          </p>
-          <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-            Register Now
-          </Button>
+      {/* Hero Section with Split Layout */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center min-h-screen">
+            {/* Left Side - Event Information */}
+            <div className="text-white space-y-6 z-10 relative pr-8">
+              <Badge className="mb-4 bg-blue-600 hover:bg-blue-700 w-fit">
+                <Code className="w-4 h-4 mr-2" />
+                Day 2 - February 24th
+              </Badge>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent leading-tight">
+                Coding Competition
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-300 max-w-lg">
+                Cast your programming spells and solve challenging problems. Let your code create magic!
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Calendar className="w-5 h-5 text-blue-500" />
+                  <span>February 24th, 2024</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-300">
+                  <MapPin className="w-5 h-5 text-blue-500" />
+                  <span>Computer Lab</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Users className="w-5 h-5 text-blue-500" />
+                  <span>Individual Competition</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Clock className="w-5 h-5 text-blue-500" />
+                  <span>3 Hours Duration</span>
+                </div>
+              </div>
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
+                Register Now
+              </Button>
+            </div>
+
+            {/* Right Side - 3D Scene */}
+            <div className="h-[600px] lg:h-[700px] relative">
+              <Canvas camera={{ position: [0, 0, 12], fov: 75 }}>
+                <Suspense fallback={null}>
+                  <Environment preset="night" />
+                  <ambientLight intensity={0.4} />
+                  <pointLight position={[10, 10, 10]} intensity={1} color="#00ff41" />
+                  <spotLight position={[-10, -10, -10]} angle={0.15} penumbra={1} intensity={0.5} color="#0066cc" />
+                  
+                  <group scale={0.7}>
+                    <Laptop3D />
+                    <CodeBlock position={[-5, 2, 2]} color="#e74c3c" code="function magic()" />
+                    <CodeBlock position={[5, 1, -2]} color="#3498db" code="const wizard = {}" />
+                    <CodeBlock position={[3, -2, 3]} color="#2ecc71" code="if (spell.works)" />
+                    <CodeBlock position={[-3, -1, -3]} color="#f39c12" code="return victory;" />
+                    
+                    <BinaryRain />
+                  </group>
+                  <Sparkles count={100} scale={15} size={3} speed={0.5} color="#00ff41" />
+                  <OrbitControls enableZoom={false} enablePan={false} />
+                </Suspense>
+              </Canvas>
+            </div>
+          </div>
         </div>
       </section>
 

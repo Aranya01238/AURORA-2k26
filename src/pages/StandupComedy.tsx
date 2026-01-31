@@ -109,44 +109,70 @@ const StandupComedy = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-yellow-900 to-slate-900">
       <Navbar />
       
-      {/* Hero Section with 3D Scene */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Canvas camera={{ position: [0, 0, 15], fov: 75 }}>
-            <Suspense fallback={null}>
-              <Environment preset="night" />
-              <ambientLight intensity={0.4} />
-              <pointLight position={[10, 10, 10]} intensity={1} color="#ffd700" />
-              <spotLight position={[0, 10, 0]} angle={0.3} penumbra={1} intensity={2} color="#fff3cd" />
-              
-              <Microphone3D />
-              <Spotlight3D position={[-8, 5, -5]} />
-              <Spotlight3D position={[8, 5, -5]} />
-              
-              {laughPositions.map((position, i) => (
-                <LaughEmoji key={i} position={position} />
-              ))}
-              
-              <Sparkles count={80} scale={12} size={4} speed={0.5} color="#ffd700" />
-              <OrbitControls enableZoom={false} enablePan={false} />
-            </Suspense>
-          </Canvas>
-        </div>
-        
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-          <Badge className="mb-4 bg-yellow-600 hover:bg-yellow-700">
-            <Mic2 className="w-4 h-4 mr-2" />
-            Day 3 - February 25th
-          </Badge>
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-yellow-400 to-orange-600 bg-clip-text text-transparent">
-            Standup Comedy
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-gray-300">
-            Bring laughter to the Great Hall with your comedic wizardry. Make the crowd roar!
-          </p>
-          <Button size="lg" className="bg-yellow-600 hover:bg-yellow-700 text-white">
-            Register Now
-          </Button>
+      {/* Hero Section with Split Layout */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center min-h-screen">
+            {/* Left Side - Event Information */}
+            <div className="text-white space-y-6 z-10 relative pr-8">
+              <Badge className="mb-4 bg-yellow-600 hover:bg-yellow-700 w-fit">
+                <Mic2 className="w-4 h-4 mr-2" />
+                Day 3 - February 25th
+              </Badge>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-yellow-400 to-orange-600 bg-clip-text text-transparent leading-tight">
+                Standup Comedy
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-300 max-w-lg">
+                Bring laughter to the Great Hall with your comedic wizardry. Make the crowd roar!
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Calendar className="w-5 h-5 text-yellow-500" />
+                  <span>February 25th, 2024</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-300">
+                  <MapPin className="w-5 h-5 text-yellow-500" />
+                  <span>Main Auditorium</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Users className="w-5 h-5 text-yellow-500" />
+                  <span>Individual Performance</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Clock className="w-5 h-5 text-yellow-500" />
+                  <span>5-8 minutes per act</span>
+                </div>
+              </div>
+              <Button size="lg" className="bg-yellow-600 hover:bg-yellow-700 text-white">
+                Register Now
+              </Button>
+            </div>
+
+            {/* Right Side - 3D Scene */}
+            <div className="h-[600px] lg:h-[700px] relative">
+              <Canvas camera={{ position: [0, 0, 15], fov: 75 }}>
+                <Suspense fallback={null}>
+                  <Environment preset="night" />
+                  <ambientLight intensity={0.4} />
+                  <pointLight position={[10, 10, 10]} intensity={1} color="#ffd700" />
+                  <spotLight position={[0, 10, 0]} angle={0.3} penumbra={1} intensity={2} color="#fff3cd" />
+                  
+                  <group scale={0.7}>
+                    <Microphone3D />
+                    <Spotlight3D position={[-8, 5, -5]} />
+                    <Spotlight3D position={[8, 5, -5]} />
+                    
+                    {laughPositions.map((position, i) => (
+                      <LaughEmoji key={i} position={position} />
+                    ))}
+                  </group>
+                  
+                  <Sparkles count={80} scale={12} size={4} speed={0.5} color="#ffd700" />
+                  <OrbitControls enableZoom={false} enablePan={false} />
+                </Suspense>
+              </Canvas>
+            </div>
+          </div>
         </div>
       </section>
 

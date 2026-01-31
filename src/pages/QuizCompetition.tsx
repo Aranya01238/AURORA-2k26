@@ -132,44 +132,70 @@ const QuizCompetition = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900">
       <Navbar />
       
-      {/* Hero Section with 3D Scene */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Canvas camera={{ position: [0, 0, 15], fov: 75 }}>
-            <Suspense fallback={null}>
-              <Environment preset="night" />
-              <ambientLight intensity={0.4} />
-              <pointLight position={[10, 10, 10]} intensity={1} color="#00ff88" />
-              <spotLight position={[-10, -10, -10]} angle={0.15} penumbra={1} intensity={0.5} color="#3498db" />
-              
-              <Brain3D />
-              <QuizBuzzer position={[-5, -2, 3]} />
-              <QuizBuzzer position={[5, -2, -3]} />
-              
-              {questionPositions.map((position, i) => (
-                <QuestionMark3D key={i} position={position} color={questionColors[i]} />
-              ))}
-              
-              <Sparkles count={100} scale={15} size={3} speed={0.5} color="#00ff88" />
-              <OrbitControls enableZoom={false} enablePan={false} />
-            </Suspense>
-          </Canvas>
-        </div>
-        
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-          <Badge className="mb-4 bg-green-600 hover:bg-green-700">
-            <HelpCircle className="w-4 h-4 mr-2" />
-            Day 4 - February 26th
-          </Badge>
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-            Quiz Competition
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-gray-300">
-            Test your knowledge across magical and muggle realms in this open house quiz challenge
-          </p>
-          <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
-            Register Team Now
-          </Button>
+      {/* Hero Section with Split Layout */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center min-h-screen">
+            {/* Left Side - Event Information */}
+            <div className="text-white space-y-6 z-10 relative pr-8">
+              <Badge className="mb-4 bg-green-600 hover:bg-green-700 w-fit">
+                <HelpCircle className="w-4 h-4 mr-2" />
+                Day 4 - February 26th
+              </Badge>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent leading-tight">
+                Quiz Competition
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-300 max-w-lg">
+                Test your knowledge across magical and muggle realms in this open house quiz challenge
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Calendar className="w-5 h-5 text-green-500" />
+                  <span>February 26th, 2024</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-300">
+                  <MapPin className="w-5 h-5 text-green-500" />
+                  <span>Main Auditorium</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Users className="w-5 h-5 text-green-500" />
+                  <span>5 Members Team</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-300">
+                  <Clock className="w-5 h-5 text-green-500" />
+                  <span>3 Hours Duration</span>
+                </div>
+              </div>
+              <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+                Register Team Now
+              </Button>
+            </div>
+
+            {/* Right Side - 3D Scene */}
+            <div className="h-[600px] lg:h-[700px] relative">
+              <Canvas camera={{ position: [0, 0, 15], fov: 75 }}>
+                <Suspense fallback={null}>
+                  <Environment preset="night" />
+                  <ambientLight intensity={0.4} />
+                  <pointLight position={[10, 10, 10]} intensity={1} color="#00ff88" />
+                  <spotLight position={[-10, -10, -10]} angle={0.15} penumbra={1} intensity={0.5} color="#3498db" />
+                  
+                  <group scale={0.7}>
+                    <Brain3D />
+                    <QuizBuzzer position={[-5, -2, 3]} />
+                    <QuizBuzzer position={[5, -2, -3]} />
+                    
+                    {questionPositions.map((position, i) => (
+                      <QuestionMark3D key={i} position={position} color={questionColors[i]} />
+                    ))}
+                  </group>
+                  
+                  <Sparkles count={100} scale={15} size={3} speed={0.5} color="#00ff88" />
+                  <OrbitControls enableZoom={false} enablePan={false} />
+                </Suspense>
+              </Canvas>
+            </div>
+          </div>
         </div>
       </section>
 
