@@ -79,8 +79,8 @@ const EnhancedMagicalCursor = () => {
 
       particlesRef.current.push(particle);
 
-      // Limit particles for performance
-      if (particlesRef.current.length > 200) {
+      // Limit particles for performance and to not interfere with custom cursor
+      if (particlesRef.current.length > 50) {
         particlesRef.current.shift();
       }
     };
