@@ -10,6 +10,8 @@ import CodingCompetition from "./pages/CodingCompetition";
 import StandupComedy from "./pages/StandupComedy";
 import QuizCompetition from "./pages/QuizCompetition";
 import Ideathon from "./pages/Ideathon";
+import Contact from "./pages/Contact";
+import Merchandise from "./pages/Merchandise";
 import EnhancedMagicalCursor from "./components/EnhancedMagicalCursor";
 
 const queryClient = new QueryClient();
@@ -28,6 +30,8 @@ const App = () => (
           <Route path="/events/comedy" element={<StandupComedy />} />
           <Route path="/events/quiz" element={<QuizCompetition />} />
           <Route path="/events/ideathon" element={<Ideathon />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/merchandise" element={<Merchandise />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

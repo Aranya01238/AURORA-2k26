@@ -1,4 +1,5 @@
-import { Sparkles, Instagram, Twitter, Mail, Phone } from "lucide-react";
+import { Sparkles, Instagram, Twitter, Mail, Phone, ShoppingBag } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -20,10 +21,14 @@ const Footer = () => {
           <div className="text-center">
             <h4 className="text-lg font-semibold text-foreground mb-4">Quick Links</h4>
             <ul className="space-y-2 text-muted-foreground">
-              <li><a href="#events" className="hover:text-primary transition-colors">Events</a></li>
-              <li><a href="#team" className="hover:text-primary transition-colors">Team</a></li>
-              <li><a href="#register" className="hover:text-primary transition-colors">Register</a></li>
-              <li><a href="#contact" className="hover:text-primary transition-colors">Contact</a></li>
+              <li><Link to="/" className="hover:text-primary transition-colors">Home</Link></li>
+              <li><a href="/#events" className="hover:text-primary transition-colors">Events</a></li>
+              <li><a href="/#team" className="hover:text-primary transition-colors">Team</a></li>
+              <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
+              <li><Link to="/merchandise" className="hover:text-primary transition-colors flex items-center justify-center gap-1">
+                <ShoppingBag className="w-4 h-4" />
+                Merchandise
+              </Link></li>
             </ul>
           </div>
 
@@ -31,13 +36,13 @@ const Footer = () => {
           <div className="text-center md:text-right">
             <h4 className="text-lg font-semibold text-foreground mb-4">Get In Touch</h4>
             <div className="space-y-3">
-              <a href="mailto:contact@aurora2k26.com" className="flex items-center justify-center md:justify-end gap-2 text-muted-foreground hover:text-primary transition-colors">
+              <a href="mailto:aurora2k26@college.edu" className="flex items-center justify-center md:justify-end gap-2 text-muted-foreground hover:text-primary transition-colors">
                 <Mail className="w-4 h-4" />
-                contact@aurora2k26.com
+                aurora2k26@college.edu
               </a>
-              <a href="tel:+1234567890" className="flex items-center justify-center md:justify-end gap-2 text-muted-foreground hover:text-primary transition-colors">
+              <a href="tel:+919876543210" className="flex items-center justify-center md:justify-end gap-2 text-muted-foreground hover:text-primary transition-colors">
                 <Phone className="w-4 h-4" />
-                +123 456 7890
+                +91 98765 43210
               </a>
               <div className="flex items-center justify-center md:justify-end gap-4 pt-2">
                 <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
