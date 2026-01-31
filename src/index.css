@@ -1,0 +1,467 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 6%;
+    --foreground: 45 30% 90%;
+
+    --card: 240 10% 10%;
+    --card-foreground: 45 30% 90%;
+
+    --popover: 240 10% 10%;
+    --popover-foreground: 45 30% 90%;
+
+    --primary: 45 80% 55%;
+    --primary-foreground: 240 10% 6%;
+
+    --secondary: 270 50% 25%;
+    --secondary-foreground: 45 30% 90%;
+
+    --muted: 240 10% 15%;
+    --muted-foreground: 45 20% 60%;
+
+    --accent: 270 60% 40%;
+    --accent-foreground: 45 30% 95%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 270 30% 20%;
+    --input: 270 30% 20%;
+    --ring: 45 80% 55%;
+
+    --radius: 0.5rem;
+
+    --gryffindor: 0 70% 40%;
+    --slytherin: 140 50% 25%;
+    --ravenclaw: 220 60% 35%;
+    --hufflepuff: 45 70% 50%;
+
+    --sidebar-background: 240 10% 8%;
+    --sidebar-foreground: 45 30% 90%;
+    --sidebar-primary: 45 80% 55%;
+    --sidebar-primary-foreground: 240 10% 6%;
+    --sidebar-accent: 270 50% 25%;
+    --sidebar-accent-foreground: 45 30% 90%;
+    --sidebar-border: 270 30% 20%;
+    --sidebar-ring: 45 80% 55%;
+  }
+
+  .dark {
+    --background: 240 10% 6%;
+    --foreground: 45 30% 90%;
+
+    --card: 240 10% 10%;
+    --card-foreground: 45 30% 90%;
+
+    --popover: 240 10% 10%;
+    --popover-foreground: 45 30% 90%;
+
+    --primary: 45 80% 55%;
+    --primary-foreground: 240 10% 6%;
+
+    --secondary: 270 50% 25%;
+    --secondary-foreground: 45 30% 90%;
+
+    --muted: 240 10% 15%;
+    --muted-foreground: 45 20% 60%;
+
+    --accent: 270 60% 40%;
+    --accent-foreground: 45 30% 95%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 270 30% 20%;
+    --input: 270 30% 20%;
+    --ring: 45 80% 55%;
+
+    --sidebar-background: 240 10% 8%;
+    --sidebar-foreground: 45 30% 90%;
+    --sidebar-primary: 45 80% 55%;
+    --sidebar-primary-foreground: 240 10% 6%;
+    --sidebar-accent: 270 50% 25%;
+    --sidebar-accent-foreground: 45 30% 90%;
+    --sidebar-border: 270 30% 20%;
+    --sidebar-ring: 45 80% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Crimson Text', serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Cinzel Decorative', cursive;
+  }
+}
+
+@layer utilities {
+  .magical-glow {
+    box-shadow: 0 0 20px hsl(45 80% 55% / 0.3), 0 0 40px hsl(270 60% 40% / 0.2);
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(45 80% 65%), hsl(45 80% 45%), hsl(45 80% 65%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .magical-border {
+    border: 2px solid transparent;
+    background: linear-gradient(hsl(240 10% 10%), hsl(240 10% 10%)) padding-box,
+      linear-gradient(135deg, hsl(45 80% 55%), hsl(270 60% 40%), hsl(45 80% 55%)) border-box;
+  }
+
+  .stars-bg {
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, hsl(45 80% 70%), transparent),
+      radial-gradient(2px 2px at 40px 70px, hsl(45 80% 60%), transparent),
+      radial-gradient(1px 1px at 90px 40px, hsl(45 80% 80%), transparent),
+      radial-gradient(2px 2px at 130px 80px, hsl(45 80% 55%), transparent),
+      radial-gradient(1px 1px at 160px 120px, hsl(45 80% 70%), transparent);
+    background-size: 200px 200px;
+    animation: twinkle 4s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+/* Harry Potter Themed Animations */
+@keyframes phoenixFly {
+  0% {
+    transform: translateX(-100px) translateY(0px) rotate(0deg);
+  }
+
+  25% {
+    transform: translateX(-50px) translateY(-20px) rotate(5deg);
+  }
+
+  50% {
+    transform: translateX(0px) translateY(0px) rotate(0deg);
+  }
+
+  75% {
+    transform: translateX(50px) translateY(-20px) rotate(-5deg);
+  }
+
+  100% {
+    transform: translateX(100px) translateY(0px) rotate(0deg);
+  }
+}
+
+@keyframes castleGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 30px hsl(45 80% 55% / 0.3), 0 0 60px hsl(45 80% 55% / 0.1);
+  }
+
+  50% {
+    box-shadow: 0 0 50px hsl(45 80% 55% / 0.5), 0 0 100px hsl(45 80% 55% / 0.2);
+  }
+}
+
+@keyframes magicalPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes snitchFly {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateX(30px) translateY(-15px) rotate(90deg);
+  }
+
+  50% {
+    transform: translateX(0) translateY(-30px) rotate(180deg);
+  }
+
+  75% {
+    transform: translateX(-30px) translateY(-15px) rotate(270deg);
+  }
+
+  100% {
+    transform: translateX(0) translateY(0) rotate(360deg);
+  }
+}
+
+@keyframes wandSparkle {
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes dementorFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  33% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+
+  66% {
+    transform: translateY(5px) rotate(-2deg);
+  }
+}
+
+/* Enhanced Magical Effects */
+.phoenix-trail {
+  animation: phoenixFly 8s ease-in-out infinite;
+}
+
+.castle-glow {
+  animation: castleGlow 4s ease-in-out infinite;
+}
+
+.magical-pulse {
+  animation: magicalPulse 3s ease-in-out infinite;
+}
+
+.snitch-flight {
+  animation: snitchFly 6s linear infinite;
+}
+
+.wand-sparkle {
+  animation: wandSparkle 2s ease-in-out infinite;
+}
+
+.dementor-hover {
+  animation: dementorFloat 5s ease-in-out infinite;
+}
+
+/* Hogwarts House Colors */
+.gryffindor-glow {
+  box-shadow: 0 0 20px hsl(0 70% 40% / 0.4), 0 0 40px hsl(45 80% 55% / 0.2);
+}
+
+.slytherin-glow {
+  box-shadow: 0 0 20px hsl(140 50% 25% / 0.4), 0 0 40px hsl(140 50% 35% / 0.2);
+}
+
+.ravenclaw-glow {
+  box-shadow: 0 0 20px hsl(220 60% 35% / 0.4), 0 0 40px hsl(220 60% 45% / 0.2);
+}
+
+.hufflepuff-glow {
+  box-shadow: 0 0 20px hsl(45 70% 50% / 0.4), 0 0 40px hsl(45 70% 60% / 0.2);
+}
+
+/* Magical Text Effects */
+.text-magical {
+  background: linear-gradient(45deg,
+      hsl(45 80% 65%),
+      hsl(270 60% 40%),
+      hsl(45 80% 65%),
+      hsl(270 60% 40%));
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: magicalTextShimmer 3s ease-in-out infinite;
+}
+
+@keyframes magicalTextShimmer {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Enhanced Card Hover Effects */
+.magical-card {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.magical-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, hsl(45 80% 55% / 0.1), transparent);
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.magical-card:hover::before {
+  animation: magicalSweep 0.8s ease-in-out;
+}
+
+@keyframes magicalSweep {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* Floating Elements */
+.magical-float {
+  animation: magicalFloat 4s ease-in-out infinite;
+}
+
+@keyframes magicalFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+
+  50% {
+    transform: translateY(-5px) rotate(0deg);
+  }
+
+  75% {
+    transform: translateY(-15px) rotate(-1deg);
+  }
+}
+
+/* Radial gradient utility for sunlight effect */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Magical Cursor Styles */
+.magical-cursor-active {
+  cursor: none !important;
+}
+
+.magical-cursor-active * {
+  cursor: none !important;
+}
+
+/* Custom cursor for interactive elements */
+.magical-cursor-active button:hover,
+.magical-cursor-active a:hover,
+.magical-cursor-active [role="button"]:hover {
+  transform: scale(1.1);
+}
+
+/* Hide default cursor on magical elements */
+.magical-element {
+  cursor: none;
+}
+
+/* Particle canvas blend modes */
+.particle-canvas {
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* Simple Magical Cursor */
+body {
+  cursor: none;
+}
+
+body::after {
+  content: '✨';
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  font-size: 16px;
+  transform: translate(-50%, -50%);
+  animation: cursorPulse 2s ease-in-out infinite;
+}
+
+@keyframes cursorPulse {
+
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
