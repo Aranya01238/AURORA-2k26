@@ -1,14 +1,36 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Menu, X, Zap, Castle, Wand2, Mail, ShoppingBag } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isActive = (path: string) => {
     return location.pathname === path;
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    // If not on home page, navigate to home first
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    } else {
+      // Already on home page, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    setIsOpen(false);
   };
 
   return (
@@ -35,20 +57,20 @@ const Navbar = () => {
               <Castle className="w-4 h-4" />
               Home
             </Link>
-            <Link 
-              to="/#events" 
+            <button 
+              onClick={() => scrollToSection('events')}
               className="text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-1 px-3 py-1 rounded-full"
             >
               <Zap className="w-4 h-4" />
               Events
-            </Link>
-            <Link 
-              to="/#team" 
+            </button>
+            <button 
+              onClick={() => scrollToSection('team')}
               className="text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-1 px-3 py-1 rounded-full"
             >
               <Sparkles className="w-4 h-4" />
               Team
-            </Link>
+            </button>
             <Link 
               to="/contact" 
               className={`transition-all duration-300 flex items-center gap-1 px-3 py-1 rounded-full ${
@@ -101,22 +123,20 @@ const Navbar = () => {
                 <Castle className="w-4 h-4" />
                 Home
               </Link>
-              <Link
-                to="/#events"
-                className="text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-primary/10"
-                onClick={() => setIsOpen(false)}
+              <button
+                onClick={() => scrollToSection('events')}
+                className="text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-primary/10 text-left"
               >
                 <Zap className="w-4 h-4" />
                 Events
-              </Link>
-              <Link
-                to="/#team"
-                className="text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-primary/10"
-                onClick={() => setIsOpen(false)}
+              </button>
+              <button
+                onClick={() => scrollToSection('team')}
+                className="text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-primary/10 text-left"
               >
                 <Sparkles className="w-4 h-4" />
                 Team
-              </Link>
+              </button>
               <Link
                 to="/contact"
                 className={`transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-lg ${

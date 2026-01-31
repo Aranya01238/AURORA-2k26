@@ -152,71 +152,20 @@ const Merchandise = () => {
       price: 599,
       originalPrice: 799,
       image: "/placeholder.svg",
-      colors: ["Blue", "Red", "Green", "Black", "White"],
+      colors: ["Navy Blue", "Black", "White", "Maroon", "Forest Green"],
       sizes: ["XS", "S", "M", "L", "XL", "XXL"],
       rating: 4.8,
       reviews: 124,
-      description: "Premium quality cotton t-shirt with magical AURORA 2K26 design. Perfect for showing your fest spirit!"
-    },
-    {
-      id: 2,
-      name: "AURORA 2K26 Hoodie",
-      price: 1299,
-      originalPrice: 1599,
-      image: "/placeholder.svg",
-      colors: ["Black", "Navy", "Gray"],
-      sizes: ["S", "M", "L", "XL", "XXL"],
-      rating: 4.9,
-      reviews: 89,
-      description: "Cozy hoodie with embroidered AURORA logo. Stay warm while looking magical!"
-    },
-    {
-      id: 3,
-      name: "AURORA 2K26 Cap",
-      price: 399,
-      originalPrice: 499,
-      image: "/placeholder.svg",
-      colors: ["Black", "Blue", "White"],
-      sizes: ["One Size"],
-      rating: 4.7,
-      reviews: 156,
-      description: "Stylish cap with AURORA 2K26 branding. Perfect accessory for any outfit!"
-    },
-    {
-      id: 4,
-      name: "AURORA 2K26 Tote Bag",
-      price: 299,
-      originalPrice: 399,
-      image: "/placeholder.svg",
-      colors: ["Natural", "Black"],
-      sizes: ["One Size"],
-      rating: 4.6,
-      reviews: 78,
-      description: "Eco-friendly tote bag with magical design. Carry your essentials in style!"
-    },
-    {
-      id: 5,
-      name: "AURORA 2K26 Sticker Pack",
-      price: 149,
-      originalPrice: 199,
-      image: "/placeholder.svg",
-      colors: ["Multicolor"],
-      sizes: ["One Size"],
-      rating: 4.9,
-      reviews: 203,
-      description: "Pack of 10 magical stickers featuring AURORA 2K26 designs. Perfect for laptops and notebooks!"
-    },
-    {
-      id: 6,
-      name: "AURORA 2K26 Water Bottle",
-      price: 499,
-      originalPrice: 649,
-      image: "/placeholder.svg",
-      colors: ["Blue", "Black", "Silver"],
-      sizes: ["500ml"],
-      rating: 4.8,
-      reviews: 92,
-      description: "Insulated water bottle with AURORA branding. Stay hydrated in magical style!"
+      description: "Premium quality 100% cotton t-shirt with the official AURORA 2K26 magical design. Features the iconic AURORA logo with golden accents and Harry Potter inspired elements. Perfect for showing your fest spirit!",
+      features: [
+        "100% Premium Cotton",
+        "Pre-shrunk fabric",
+        "Reinforced collar and sleeves",
+        "Golden foil AURORA 2K26 logo",
+        "Magical Harry Potter themed design",
+        "Comfortable regular fit",
+        "Machine washable"
+      ]
     }
   ];
 
@@ -311,110 +260,191 @@ const Merchandise = () => {
 
       {/* Products Section */}
       <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-white mb-4">Our Products</h2>
-            <p className="text-gray-300 text-lg">Discover our exclusive AURORA 2K26 merchandise collection</p>
+            <h2 className="text-4xl font-bold text-white mb-4">Official AURORA 2K26 T-Shirt</h2>
+            <p className="text-gray-300 text-lg">Get your exclusive AURORA 2K26 merchandise - Limited Edition!</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <Card key={product.id} className="bg-black/20 backdrop-blur-sm border-orange-500/30 hover:bg-black/30 transition-all duration-300">
-                <CardHeader className="p-0">
-                  <div className="h-64 bg-gradient-to-br from-orange-500/20 to-yellow-500/20 rounded-t-lg flex items-center justify-center">
-                    <Shirt className="w-24 h-24 text-orange-400" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Product Images/Gallery */}
+            <div className="space-y-6">
+              <div className="h-96 bg-gradient-to-br from-orange-500/20 to-yellow-500/20 rounded-lg flex items-center justify-center border border-orange-500/30">
+                <Shirt className="w-32 h-32 text-orange-400" />
+              </div>
+              
+              {/* Color Preview */}
+              <div className="grid grid-cols-5 gap-3">
+                {products[0].colors.map((color, index) => (
+                  <div key={color} className="h-16 bg-gradient-to-br from-orange-500/20 to-yellow-500/20 rounded-lg flex items-center justify-center border border-orange-500/30">
+                    <div className={`w-8 h-8 rounded-full ${
+                      color === 'Navy Blue' ? 'bg-blue-900' :
+                      color === 'Black' ? 'bg-black' :
+                      color === 'White' ? 'bg-white' :
+                      color === 'Maroon' ? 'bg-red-900' :
+                      'bg-green-800'
+                    }`}></div>
                   </div>
-                </CardHeader>
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-xl font-semibold text-white">{product.name}</h3>
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <span className="text-sm text-gray-300">{product.rating}</span>
-                    </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Product Details */}
+            <div className="space-y-6">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className={`w-4 h-4 ${i < Math.floor(products[0].rating) ? 'text-yellow-400 fill-current' : 'text-gray-400'}`} />
+                    ))}
                   </div>
-                  
-                  <p className="text-gray-400 text-sm mb-4">{product.description}</p>
-                  
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-2xl font-bold text-orange-400">₹{product.price}</span>
-                    <span className="text-lg text-gray-500 line-through">₹{product.originalPrice}</span>
-                    <Badge className="bg-green-600">
-                      {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
-                    </Badge>
-                  </div>
-                  
-                  <div className="space-y-3 mb-4">
-                    {product.sizes.length > 1 && (
-                      <div>
-                        <label className="block text-white text-sm mb-1">Size</label>
-                        <Select value={selectedSize} onValueChange={setSelectedSize}>
-                          <SelectTrigger className="bg-orange-500/10 border-orange-500/30 text-white">
-                            <SelectValue placeholder="Select size" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {product.sizes.map((size) => (
-                              <SelectItem key={size} value={size}>{size}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    )}
-                    
-                    {product.colors.length > 1 && (
-                      <div>
-                        <label className="block text-white text-sm mb-1">Color</label>
-                        <Select value={selectedColor} onValueChange={setSelectedColor}>
-                          <SelectTrigger className="bg-orange-500/10 border-orange-500/30 text-white">
-                            <SelectValue placeholder="Select color" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {product.colors.map((color) => (
-                              <SelectItem key={color} value={color}>{color}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    )}
-                    
-                    <div>
-                      <label className="block text-white text-sm mb-1">Quantity</label>
-                      <div className="flex items-center gap-2">
-                        <Button 
-                          size="sm" 
-                          variant="outline" 
-                          onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                          className="border-orange-500/30 text-orange-400 hover:bg-orange-500/10"
-                        >
-                          <Minus className="w-4 h-4" />
-                        </Button>
-                        <span className="text-white px-4">{quantity}</span>
-                        <Button 
-                          size="sm" 
-                          variant="outline" 
-                          onClick={() => setQuantity(quantity + 1)}
-                          className="border-orange-500/30 text-orange-400 hover:bg-orange-500/10"
-                        >
-                          <Plus className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                  
+                  <span className="text-gray-300">({products[0].reviews} reviews)</span>
+                </div>
+                <h1 className="text-3xl font-bold text-white mb-4">{products[0].name}</h1>
+                <p className="text-gray-300 text-lg mb-6">{products[0].description}</p>
+              </div>
+
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-4xl font-bold text-orange-400">₹{products[0].price}</span>
+                <span className="text-2xl text-gray-500 line-through">₹{products[0].originalPrice}</span>
+                <Badge className="bg-green-600 text-lg px-3 py-1">
+                  {Math.round(((products[0].originalPrice - products[0].price) / products[0].originalPrice) * 100)}% OFF
+                </Badge>
+              </div>
+
+              {/* Product Features */}
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold text-white mb-3">Features:</h3>
+                <ul className="space-y-2">
+                  {products[0].features.map((feature, index) => (
+                    <li key={index} className="flex items-center gap-2 text-gray-300">
+                      <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Size Selection */}
+              <div className="space-y-3">
+                <label className="block text-white text-lg font-semibold">Size</label>
+                <Select value={selectedSize} onValueChange={setSelectedSize}>
+                  <SelectTrigger className="bg-orange-500/10 border-orange-500/30 text-white h-12 text-lg">
+                    <SelectValue placeholder="Select your size" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {products[0].sizes.map((size) => (
+                      <SelectItem key={size} value={size}>{size}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Color Selection */}
+              <div className="space-y-3">
+                <label className="block text-white text-lg font-semibold">Color</label>
+                <Select value={selectedColor} onValueChange={setSelectedColor}>
+                  <SelectTrigger className="bg-orange-500/10 border-orange-500/30 text-white h-12 text-lg">
+                    <SelectValue placeholder="Select color" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {products[0].colors.map((color) => (
+                      <SelectItem key={color} value={color}>{color}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Quantity Selection */}
+              <div className="space-y-3">
+                <label className="block text-white text-lg font-semibold">Quantity</label>
+                <div className="flex items-center gap-4">
                   <Button 
-                    className="w-full bg-orange-600 hover:bg-orange-700 text-white"
-                    onClick={() => addToCart(product)}
+                    size="lg" 
+                    variant="outline" 
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="border-orange-500/30 text-orange-400 hover:bg-orange-500/10 h-12 w-12"
                   >
-                    <ShoppingCart className="w-4 h-4 mr-2" />
-                    Add to Cart
+                    <Minus className="w-5 h-5" />
                   </Button>
-                  
-                  <p className="text-xs text-gray-400 mt-2 text-center">
-                    {product.reviews} reviews • Free shipping on orders above ₹999
-                  </p>
+                  <span className="text-white text-2xl font-bold px-6">{quantity}</span>
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="border-orange-500/30 text-orange-400 hover:bg-orange-500/10 h-12 w-12"
+                  >
+                    <Plus className="w-5 h-5" />
+                  </Button>
+                </div>
+              </div>
+
+              {/* Add to Cart Button */}
+              <Button 
+                size="lg"
+                className="w-full bg-orange-600 hover:bg-orange-700 text-white h-14 text-lg font-semibold"
+                onClick={() => addToCart(products[0])}
+                disabled={!selectedSize || !selectedColor}
+              >
+                <ShoppingCart className="w-5 h-5 mr-2" />
+                Add to Cart - ₹{products[0].price * quantity}
+              </Button>
+
+              {/* Additional Info */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6 border-t border-orange-500/30">
+                <div className="flex items-center gap-2 text-gray-300">
+                  <Package className="w-5 h-5 text-orange-500" />
+                  <span>Free shipping above ₹999</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-300">
+                  <Zap className="w-5 h-5 text-orange-500" />
+                  <span>3-5 days delivery</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-300">
+                  <Heart className="w-5 h-5 text-orange-500" />
+                  <span>100% authentic</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-300">
+                  <Star className="w-5 h-5 text-orange-500" />
+                  <span>Premium quality</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Coming Soon Section */}
+      <section className="py-16 px-4 bg-black/10">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-white mb-6">More Magical Items Coming Soon!</h2>
+          <p className="text-gray-300 text-lg mb-8">
+            We're brewing more magical merchandise for you. Stay tuned for hoodies, caps, bags, stickers, and more!
+          </p>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { name: "AURORA Hoodie", icon: "🧥" },
+              { name: "Magical Cap", icon: "🧢" },
+              { name: "Tote Bag", icon: "👜" },
+              { name: "Sticker Pack", icon: "✨" }
+            ].map((item, index) => (
+              <Card key={index} className="bg-orange-500/10 backdrop-blur-sm border-orange-500/30 opacity-60">
+                <CardContent className="p-6 text-center">
+                  <div className="text-4xl mb-3">{item.icon}</div>
+                  <h3 className="text-white font-semibold mb-2">{item.name}</h3>
+                  <Badge variant="outline" className="border-orange-500/50 text-orange-400">
+                    Coming Soon
+                  </Badge>
                 </CardContent>
               </Card>
             ))}
+          </div>
+          
+          <div className="mt-8">
+            <p className="text-gray-400">
+              Want to be notified when new items arrive? Follow us on social media or contact us!
+            </p>
           </div>
         </div>
       </section>

@@ -1,7 +1,30 @@
 import { Sparkles, Instagram, Twitter, Mail, Phone, ShoppingBag } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const scrollToSection = (sectionId: string) => {
+    // If not on home page, navigate to home first
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    } else {
+      // Already on home page, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
   return (
     <footer className="py-16 px-4 border-t border-border/50 bg-background">
       <div className="max-w-7xl mx-auto">
@@ -22,8 +45,22 @@ const Footer = () => {
             <h4 className="text-lg font-semibold text-foreground mb-4">Quick Links</h4>
             <ul className="space-y-2 text-muted-foreground">
               <li><Link to="/" className="hover:text-primary transition-colors">Home</Link></li>
-              <li><a href="/#events" className="hover:text-primary transition-colors">Events</a></li>
-              <li><a href="/#team" className="hover:text-primary transition-colors">Team</a></li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('events')} 
+                  className="hover:text-primary transition-colors"
+                >
+                  Events
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('team')} 
+                  className="hover:text-primary transition-colors"
+                >
+                  Team
+                </button>
+              </li>
               <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
               <li><Link to="/merchandise" className="hover:text-primary transition-colors flex items-center justify-center gap-1">
                 <ShoppingBag className="w-4 h-4" />
